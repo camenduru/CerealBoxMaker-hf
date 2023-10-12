@@ -1,6 +1,6 @@
 ---
 title: CerealBoxMaker
-emoji: 🏆
+emoji: 🥛
 colorFrom: pink
 colorTo: purple
 sdk: gradio
