@@ -22,7 +22,7 @@ def create_cereal_box(input_image):
     cover_img = Image.fromarray((input_image.astype(np.uint8)))
 
     # Load the template image
-    template_img = Image.open('CerealBoxMaker/template.jpeg')  # Replace with your actual path
+    template_img = Image.open('CerealBoxMaker/template.jpeg') 
 
     # Simplified cereal box creation logic
     scaling_factor = 1.5
