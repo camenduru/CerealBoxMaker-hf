@@ -1,5 +1,7 @@
-git+https://github.com/huggingface/diffusers.git@2297d1edaf42b9aee83d8c5f7cf2a3c1194189b3
-transformers
-accelerate
-safetensors
-spaces
+accelerate==0.23.0
+diffusers==0.21.3
+gradio==3.45.2
+invisible-watermark==0.2.0
+Pillow==10.0.1
+torch==2.0.1
+transformers==4.33.3
