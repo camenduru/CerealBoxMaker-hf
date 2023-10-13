@@ -5,7 +5,7 @@ from PIL import Image
 import random
 from diffusers import DiffusionPipeline
 
-pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0")
+pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16, variant="fp16")
 pipeline.load_lora_weights("ostris/super-cereal-sdxl-lora")
 pipeline.to("cuda:0")
 
@@ -66,4 +66,4 @@ with gr.Blocks() as app:
     )
 
 app.queue(max_size=20, api_open=False)
-app.launch()
+app.launch(share=True)
