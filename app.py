@@ -5,34 +5,19 @@ from PIL import Image
 import random
 from diffusers import DiffusionPipeline
 
-# Initialize the DiffusionPipeline model with LoRA weights
+# Initialize DiffusionPipeline with LoRA weights
 pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0")
 pipeline.load_lora_weights("ostris/super-cereal-sdxl-lora")
-pipeline.to("cuda:0")
-
-MAX_SEED = np.iinfo(np.int32).max
 
 def text_to_image(prompt):
-    seed = random.randint(0, MAX_SEED)
-    negative_prompt = "ugly, blurry, nsfw, gore, blood"
-    
-    output = pipeline(
-        prompt=prompt,
-        negative_prompt=negative_prompt,
-        width=1024,
-        height=1024,
-        guidance_scale=7.0,
-        num_inference_steps=25,
-        generator=torch.Generator().manual_seed(seed),
-    )
-    
-    generated_img_tensor = output.images[0]
-    generated_img_array = generated_img_tensor.cpu().numpy().transpose((1, 2, 0))
-    return generated_img_array
+    generated_img = pipeline(prompt)
+    return generated_img
 
 def create_cereal_box(input_image):
-    cover_img = Image.fromarray((input_image.astype(np.uint8)))
+    cover_img = input_image  # This should already be a PIL Image
     template_img = Image.open('CerealBoxMaker/template.jpeg')
+    
+    # Cereal box creation logic
     scaling_factor = 1.5
     rect_height = int(template_img.height * 0.32)
     new_width = int(rect_height * 0.70)
@@ -49,13 +34,15 @@ def create_cereal_box(input_image):
     template_copy = template_img.copy()
     template_copy.paste(cover_resized_scaled, left_position)
     template_copy.paste(cover_resized_scaled, right_position)
+    
+    # Convert to a numpy array for Gradio output
     template_copy_array = np.array(template_copy)
     return template_copy_array
 
 def combined_function(prompt):
-    generated_img_array = text_to_image(prompt)
-    final_img = create_cereal_box(generated_img_array)
+    generated_img = text_to_image(prompt)
+    final_img = create_cereal_box(generated_img)
     return final_img
 
-# Create a Gradio Interface
-gr.Interface(fn=combined_function, inputs="text", outputs="image").launch(debug=True)
+# Create Gradio Interface
+gr.Interface(fn=combined_function, inputs="text", outputs="image").launch()
