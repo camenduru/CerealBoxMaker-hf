@@ -50,7 +50,7 @@ with gr.Blocks() as app:
     gr.HTML("<div style='text-align: center;'><h1>Cereal Box Maker 🥣</h1></div>")
     gr.HTML("<div style='text-align: center;'><p>This application uses StableDiffusion XL to create any cereal box you could ever imagine!</p></div>")
     gr.HTML("<div style='text-align: center;'><h3>Instructions:</h3><ol><li>Describe the cereal box you want to create and hit generate!</li><li>Print it out, cut the outside, fold the lines, and then tape!</li></ol></div>")
-    gr.HTML("<div style='text-align: center;'><p>A space by AP 🐧, follow me on <a href='https://twitter.com/angrypenguinPNG'>Twitter</a>! H/T to OstrisAI <a href='https://twitter.com/ostrisai'>Twitter</a> for their Cereal Box LoRA!</p></div>")
+    gr.HTML("<div style='text-align: center;'><p>A space by AP 🐧, follow me on <a href='https://twitter.com/angrypenguinPNG'>Twitter</a>! H/T to <a href='https://twitter.com/ostrisai'>OstrisAI</a> for their Cereal Box LoRA!</p></div>")
     
     with gr.Row():
         textbox = gr.Textbox(label="Describe your cereal box: Ex: 'Avengers Cereal'")
@@ -66,4 +66,4 @@ with gr.Blocks() as app:
     )
 
 app.queue(concurrency_count=4, max_size=20, api_open=False)
-app.launch(debug=True)
+app.launch()
