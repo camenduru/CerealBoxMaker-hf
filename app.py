@@ -21,7 +21,7 @@ def text_to_image(prompt):
 
 def create_cereal_box(input_image):
     cover_img = Image.fromarray(input_image.astype('uint8'), 'RGB')
-    template_img = Image.open('/content/866b9b8f50b50879120be0b87dfd6050.jpg')
+    template_img = Image.open('CerealBoxMaker/template.jpeg')
     scaling_factor = 1.5
     rect_height = int(template_img.height * 0.32)
     new_width = int(rect_height * 0.70)
