@@ -65,5 +65,5 @@ with gr.Blocks() as app:
         outputs=[output_img]
     )
 
-app.queue(concurrency_count=4, max_size=20, api_open=False)
+app.queue(max_size=20, api_open=False)
 app.launch()
